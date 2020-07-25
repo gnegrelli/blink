@@ -1,4 +1,5 @@
 import time
+from blinker import signal
 
 
 class Ping(object):
@@ -19,8 +20,14 @@ class Pong(object):
         time.sleep(2)
 
 
+signal_ping = signal('signal_ping')
+signal_ping.connect(Ping.ping)
+
+signal_pong = signal('signal_pong')
+signal_pong.connect(Pong.pong)
+
 ping = Ping()
 pong = Pong()
 
-ping.ping()
-pong.pong()
+signal_ping.send()
+signal_pong.send()
