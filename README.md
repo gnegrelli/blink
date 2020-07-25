@@ -1,2 +1,3 @@
 # blink
-Repository for testing signaling with blinker
+
+Repository for testing signaling with blinker.
