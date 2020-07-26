@@ -6,28 +6,26 @@ class Ping(object):
     def __init__(self):
         pass
 
-    def ping(self):
+    def action(self, sender):
         print('Ping!')
-        time.sleep(2)
+        time.sleep(1)
+        signal('s_pong').send()
 
 
 class Pong(object):
     def __init__(self):
         pass
 
-    def pong(self):
+    def action(self, sender):
         print('Pong!')
-        time.sleep(2)
+        time.sleep(1)
+        signal('s_ping').send()
 
-
-signal_ping = signal('signal_ping')
-signal_ping.connect(Ping.ping)
-
-signal_pong = signal('signal_pong')
-signal_pong.connect(Pong.pong)
 
 ping = Ping()
 pong = Pong()
 
-signal_ping.send()
-signal_pong.send()
+signal('s_ping').connect(ping.action)
+signal('s_pong').connect(pong.action)
+
+signal('s_ping').send()
